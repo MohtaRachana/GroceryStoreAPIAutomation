@@ -17,7 +17,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('swaglab/pom.xml') }}
+          key: ${{ runner.os }}-maven-${{ hashFiles('GroceryStore/pom.xml') }}
           restore-keys: ${{ runner.os }}-maven
 
       - name: Install Chrome
@@ -41,20 +41,20 @@ jobs:
 
       - name: Install dependencies
         run: mvn clean install -DskipTests
-        working-directory: GroceryStore  # Set the working directory to swaglab
+        working-directory: GroceryStore  # Set the working directory to GroceryStore
 
-      - name: Run Login Scenarios
-        working-directory: swaglab  # Set the working directory to swaglab
+      - name: Run cart Scenarios
+        working-directory: GroceryStore  # Set the working directory to GroceryStore
         run: |
           mvn clean test -Dtest=TestCartRunner -Dmaven.test.failure.ignore=true
 
            
-      - name: Upload Surefire Test Report
-        if: always()  # Always run this step
-        uses: actions/upload-artifact@v2
-        with:
-          name: surefire-test-report
-          path: swaglab/target/surefire-reports
+     # - name: Upload Surefire Test Report
+      #  if: always()  # Always run this step
+       # uses: actions/upload-artifact@v2
+        #with:
+         # name: surefire-test-report
+          #path: swaglab/target/surefire-reports
 
       - name: Generate Karate Test Report
         if: always()  # Always run this step
