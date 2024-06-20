@@ -60,7 +60,7 @@ jobs:
         if: always()  # Always run this step
         run: |
           mkdir -p karate-reports
-          cp -r swaglab/target/karate-reports/* karate-reports/
+          cp -r GroceryStore/target/karate-reports/* karate-reports/
         
       - name: Upload Karate Test Report
         if: always()  # Always run this step
